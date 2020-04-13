@@ -1,3 +1,9 @@
-#laravel_with_docker
-##to start:
+
+# Laravel with docker
+
+Example of laravel project with docker
+
+## Installation
+
 docker-compose up
+
