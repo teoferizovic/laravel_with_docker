@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/test', function () {
     var_dump("test route");die;
 });
+
+Route::get('/posts/index/{id?}','PostController@index');
+
+Route::post('/posts/create','PostController@create');
+
+Route::put('/posts/update/{id}','PostController@update');
+
+Route::delete('/posts/delete/{id}','PostController@delete');
