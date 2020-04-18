@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/sign-in/github','UserController@signin');
+
+Route::get('/sign-in/github/redirect','UserController@redirect');
+
 Route::get('/', function () {
     return view('welcome');
 });
