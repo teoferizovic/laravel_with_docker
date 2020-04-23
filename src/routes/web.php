@@ -17,6 +17,10 @@ Route::get('/sign-in/github','UserController@signin');
 
 Route::get('/sign-in/github/redirect','UserController@redirect');
 
+Route::get('/sign-in/fb','UserController@signinFB');
+
+Route::get('/sign-in/fb/redirect','UserController@redirectFB');
+
 Route::get('/', function () {
     return view('welcome');
 });

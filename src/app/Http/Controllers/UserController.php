@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Hash;
 use Str;
 use Socialite;
+use Auth;
 
 class UserController extends Controller
 {
@@ -71,12 +72,42 @@ class UserController extends Controller
     			"password" => Hash::make(Str::random(24)),
     		]
     	);
+
+        Auth::login($user);
   
     	auth()->user()->createToken('authToken')->accessToken;
 
 		return response()->json([
 	        'message' => 'Successfully logged in with github account'
 	    ]);
+
+    }
+
+    public function signinFB() {
+        return Socialite::driver("facebook")->redirect();
+    }
+
+    public function redirectFB() {
+        
+        $user = Socialite::driver("facebook")->user();
+        
+        $user = User::firstOrCreate([
+                "email" => $user->email
+            ],
+            [
+                "name" => $user->name,
+                "password" => Hash::make(Str::random(24)),
+            ]
+        );
+
+        Auth::login($user);
+
+        $accessToken = auth()->user()->createToken('authToken')->accessToken;
+
+        return response()->json([
+            'token' => $accessToken,
+            'message' => 'Successfully logged in with fb account'
+        ]);
 
     }
 }
