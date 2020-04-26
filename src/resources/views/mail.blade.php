@@ -1,0 +1,3 @@
+<div>
+    Body: {{ $body }}
+</div>

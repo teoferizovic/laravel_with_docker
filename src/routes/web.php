@@ -36,3 +36,5 @@ Route::post('/posts/create','PostController@create');
 Route::put('/posts/update/{id}','PostController@update');
 
 Route::delete('/posts/delete/{id}','PostController@delete');
+
+Route::post('/email/send','EmailController@create');
