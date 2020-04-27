@@ -38,3 +38,7 @@ Route::put('/posts/update/{id}','PostController@update');
 Route::delete('/posts/delete/{id}','PostController@delete');
 
 Route::post('/email/send','EmailController@create');
+
+Route::post('/notification/create','NotificationController@create');
+
+Route::get('/users/{id}/notification','NotificationController@read');
