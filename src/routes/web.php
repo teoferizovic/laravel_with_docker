@@ -42,3 +42,10 @@ Route::post('/email/send','EmailController@create');
 Route::post('/notification/create','NotificationController@create');
 
 Route::get('/users/{id}/notification','NotificationController@read');
+
+Route::get('/payment', function () {
+    return view('payment');
+});
+
+Route::post('/create-payment','PaymentController@createPayment');
+Route::post('/execute-payment','PaymentController@executePayment');
