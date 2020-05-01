@@ -48,4 +48,7 @@ Route::get('/payment', function () {
 });
 
 Route::post('/create-payment','PaymentController@createPayment');
+
 Route::post('/execute-payment','PaymentController@executePayment');
+
+Route::resource('blogs','BlogController');
