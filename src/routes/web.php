@@ -52,3 +52,9 @@ Route::post('/create-payment','PaymentController@createPayment');
 Route::post('/execute-payment','PaymentController@executePayment');
 
 Route::resource('blogs','BlogController');
+
+Route::get('/countries', 'CountryController@index');
+
+Route::post('/country/fetch', 'CountryController@fetch')->name('autocomplete.fetch');
+
+Route::get('/country/fetchAll', 'CountryController@fetchAll')->name('autocomplete.fetchAll');
