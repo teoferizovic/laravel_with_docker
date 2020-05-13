@@ -58,3 +58,5 @@ Route::get('/countries', 'CountryController@index');
 Route::post('/country/fetch', 'CountryController@fetch')->name('autocomplete.fetch');
 
 Route::get('/country/fetchAll', 'CountryController@fetchAll')->name('autocomplete.fetchAll');
+
+Route::get('/country/cache', 'CountryController@getCache');

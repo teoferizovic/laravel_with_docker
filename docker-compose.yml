@@ -91,6 +91,13 @@ services:
     working_dir: /var/www/html
     entrypoint: ['/var/www/html/artisan']
     networks:
-      - laravel    
+      - laravel
+  redis:
+    image: redis
+    container_name: redis-cont
+    ports:
+      - 9991:6379
+    networks:
+      - laravel          
 
      

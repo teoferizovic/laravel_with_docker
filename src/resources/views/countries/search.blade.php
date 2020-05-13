@@ -34,12 +34,17 @@ $(document).ready(function(){
 
  $("#name").click(function () {
       if (search == false) {
+        var output = '<ul class="dropdown-menu" style="display:block; position:relative">';
         $.ajax({
             url:"{{ route('autocomplete.fetchAll') }}",
             method:"GET",
               success:function(data){
+                data.forEach(function(row) {
+                  output += '<li><a href="https://www.google.com" target="_blank">'+row.name+'</a></li>'
+                });
+                output += '</ul>';
                 $('#countryList').fadeIn();  
-                $('#countryList').html(data);
+                $('#countryList').html(output);
               }
         });  
       } 
@@ -61,6 +66,7 @@ $(document).ready(function(){
           });
       } else {
          $('#countryList').fadeOut();
+         search = true;
       }
   });
 

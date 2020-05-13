@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Redis;
 
 class CountryController extends Controller
 {
@@ -36,15 +37,15 @@ class CountryController extends Controller
 
     public function fetchAll(Request $request) {
     	
-    	$data = DB::table('countries')->get();
-		$output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+    	$countries = DB::table('countries')->get();
+	    return \Response::json($countries,200);
+		
+    }
 
-	    foreach($data as $row) {
-		    $output .= '<li><a href="#">'.$row->name.'</a></li>';
-	    }
+    public function getCache() {
 
-		$output .= '</ul>';
-		return $output;
-
+    	Redis::set("test","John Doe");
+    	return \Response::json(Redis::get('test'), 200);
+    	
     }
 }
