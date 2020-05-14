@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Post;
+use Illuminate\Pipeline\Pipeline;
+use App\QueryFilters\Active;
+use App\QueryFilters\Sort;
 
 class PostController extends Controller
 {
-    public function index(Request $request,$id=null){
+    public function index(Request $request, $id=null){
     	
     	if ($id != null) {
     		$post = Post::find($id);
             return \Response::json($post,200);
     	}
-
-    	$posts  = Post::get();
+        
+    	$posts = app(Pipeline::class)
+            ->send(Post::all())
+            ->through([
+                Active::class,
+                Sort::class
+            ])
+            ->thenReturn();
+        
         return \Response::json($posts,200);
 
     }
