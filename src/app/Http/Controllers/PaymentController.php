@@ -18,6 +18,9 @@ use PayPal\Rest\ApiContext;
 use URL;
 use Redirect;
 use PayPal\Auth\OAuthTokenCredential;
+use App\Billing\BankPaymentGateway;
+use App\Orders\OrderDetail;
+use App\Billing\PaymentGatewayContractI;
 
 class PaymentController extends Controller
 {
@@ -121,6 +124,12 @@ class PaymentController extends Controller
 
     	return $result;
 
+    }
+
+    public function mode(OrderDetail $order,PaymentGatewayContractI $paymentGateway) {
+        $order->all();
+        var_dump($paymentGateway->charge(23));
+        die;
     }
 
 }

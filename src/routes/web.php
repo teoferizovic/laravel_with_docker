@@ -47,6 +47,8 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
+Route::get('/payment-mode','PaymentController@mode');
+
 Route::post('/create-payment','PaymentController@createPayment');
 
 Route::post('/execute-payment','PaymentController@executePayment');
@@ -60,3 +62,4 @@ Route::post('/country/fetch', 'CountryController@fetch')->name('autocomplete.fet
 Route::get('/country/fetchAll', 'CountryController@fetchAll')->name('autocomplete.fetchAll');
 
 Route::get('/country/cache', 'CountryController@getCache');
+
