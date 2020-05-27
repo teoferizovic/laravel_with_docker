@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use Illuminate\Support\Facades\Redis;
+use Redis;
+use Cache;
 
 class CountryController extends Controller
 {
@@ -37,14 +38,24 @@ class CountryController extends Controller
 
     public function fetchAll(Request $request) {
     	
-    	$countries = DB::table('countries')->get();
-	    return \Response::json($countries,200);
+		$results = Cache::remember('countries', 360,function () {
+		    return  DB::table('countries')->get();
+		});
+    	
+	    return \Response::json($results,200);
 		
     }
 
     public function getCache() {
-
+    	//Cache::forget('countries');
     	Redis::set("test","John Doe");
+    	//example of pipeline
+    	Redis::pipeline(function ($pipe) {
+		    for ($i = 0; $i < 2; $i++) {
+		        $pipe->set("key:$i", $i);
+		    }
+		});
+		
     	return \Response::json(Redis::get('test'), 200);
     	
     }
