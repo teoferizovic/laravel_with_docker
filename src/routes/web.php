@@ -63,3 +63,4 @@ Route::get('/country/fetchAll', 'CountryController@fetchAll')->name('autocomplet
 
 Route::get('/country/cache', 'CountryController@getCache');
 
+Route::get('/mechanics/index/{id?}', 'MechanicController@index');
