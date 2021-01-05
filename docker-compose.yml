@@ -17,6 +17,8 @@ services:
       - mysql
     networks:
       - laravel
+    environment:
+      - NGINX_HOST=localhost  
 
   mysql:
     image: mysql:5.7
@@ -24,7 +26,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "4306:3306"
+      - "5306:3306"
     environment:
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_USER: "${DB_USERNAME}"
@@ -103,5 +105,13 @@ services:
       - ./db/redis_data:/data  
     networks:
       - laravel          
-
+  cron:
+    build:
+      context: ./cron
+      dockerfile: Dockerfile
+    container_name: cron
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - laravel
      
